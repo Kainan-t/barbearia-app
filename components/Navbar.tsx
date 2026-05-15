@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { config } from "@/lib/config";
 import { Scissors } from "lucide-react";
 import { useState } from "react";
 
@@ -23,7 +24,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors">
           <Scissors className="h-6 w-6" />
-          <span className="font-bold text-xl tracking-tight">BarberShop</span>
+          <span className="font-bold text-xl tracking-tight">{config.nome}</span>
         </Link>
 
         {/* Desktop Links */}

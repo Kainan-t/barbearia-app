@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { config } from "@/lib/config";
 import {
   Scissors,
   LayoutDashboard,
@@ -37,7 +38,7 @@ export function AdminSidebar() {
       <div className="flex items-center gap-2 px-6 h-16 border-b border-zinc-800">
         <Scissors className="h-6 w-6 text-amber-400" />
         <div>
-          <p className="font-bold text-white leading-tight">BarberShop</p>
+          <p className="font-bold text-white leading-tight">{config.nome}</p>
           <p className="text-xs text-zinc-500">Painel Admin</p>
         </div>
       </div>

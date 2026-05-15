@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { config } from "@/lib/config";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -8,8 +9,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "BarberShop — Barbearia Premium",
-  description: "Agende seu horário, confira nossos produtos e fique por dentro das novidades.",
+  title: `${config.nome} — Barbearia Premium`,
+  description: config.descricao,
+  metadataBase: new URL(config.siteUrl),
 };
 
 export default function RootLayout({

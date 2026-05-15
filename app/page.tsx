@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
+import { config } from "@/lib/config";
 import {
   Scissors, Clock, Star, MapPin, Phone,
   CalendarDays, ShoppingBag, ChevronRight,
@@ -34,11 +35,11 @@ export default function Home() {
               <span className="text-sm text-amber-400 font-medium">Barbearia Premium</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
-              Estilo &amp; Precisão<br />
-              <span className="text-amber-400">em cada corte</span>
+              <span className="text-amber-400">{config.nome}</span><br />
+              {config.slogan}
             </h1>
             <p className="text-lg text-zinc-400 max-w-xl">
-              Transformamos seu visual com maestria. Agendamento online, atendimento premium e produtos exclusivos.
+              {config.descricao}
             </p>
             <div className="flex gap-3 flex-wrap justify-center">
               <Link href="/agendar">
@@ -66,21 +67,21 @@ export default function Home() {
               <Clock className="h-5 w-5 text-amber-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-white">Horário de funcionamento</p>
-                <p className="text-sm text-zinc-400">Seg–Sex: 9h–20h · Sáb: 9h–18h</p>
+                <p className="text-sm text-zinc-400">{config.horarioSemana} · {config.horarioSabado}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <MapPin className="h-5 w-5 text-amber-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-white">Localização</p>
-                <p className="text-sm text-zinc-400">Rua das Flores, 123 – Centro</p>
+                <p className="text-sm text-zinc-400">{config.endereco}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-5 w-5 text-amber-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-white">Contato</p>
-                <p className="text-sm text-zinc-400">(11) 9 9999-9999</p>
+                <p className="text-sm text-zinc-400">{config.telefone}</p>
               </div>
             </div>
           </div>
@@ -155,11 +156,16 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-amber-400">
             <Scissors className="h-5 w-5" />
-            <span className="font-bold">BarberShop</span>
+            <span className="font-bold">{config.nome}</span>
           </div>
-          <p className="text-xs text-zinc-500">© 2024 BarberShop. Todos os direitos reservados.</p>
-          <a href="#" className="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-medium">
-            Instagram
+          <p className="text-xs text-zinc-500">© {new Date().getFullYear()} {config.nome}. Todos os direitos reservados.</p>
+          <a
+            href={config.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 hover:text-amber-400 transition-colors text-sm font-medium"
+          >
+            {config.instagram}
           </a>
         </div>
       </footer>
