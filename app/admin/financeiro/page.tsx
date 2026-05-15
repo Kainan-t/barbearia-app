@@ -89,7 +89,8 @@ export default function FinanceiroPage() {
                     <Tooltip
                       contentStyle={{ backgroundColor: "#18181b", border: "1px solid #3f3f46", borderRadius: "8px" }}
                       labelStyle={{ color: "#e4e4e7" }}
-                      formatter={(v: number) => [formatarMoeda(v), "Receita"]}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      formatter={(v: any) => [formatarMoeda(Number(v)), "Receita"]}
                     />
                     <Bar dataKey="total" fill="#f59e0b" radius={[4, 4, 0, 0]} />
                   </BarChart>
