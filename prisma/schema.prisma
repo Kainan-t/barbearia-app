@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  nome     String
+  email    String @unique
+  senha    String
+  criadoEm DateTime @default(now())
+}
+
+model Cliente {
+  id          String   @id @default(cuid())
+  nome        String
+  email       String   @unique
+  telefone    String?
+  dataNasc    DateTime?
+  observacoes String?
+  criadoEm   DateTime @default(now())
+
+  agendamentos Agendamento[]
+  pedidos      Pedido[]
+}
+
+model Servico {
+  id         String  @id @default(cuid())
+  nome       String
+  descricao  String?
+  preco      Float
+  duracaoMin Int
+  ativo      Boolean  @default(true)
+  criadoEm  DateTime @default(now())
+
+  agendamentos Agendamento[]
+}
+
+model Agendamento {
+  id         String   @id @default(cuid())
+  clienteId  String
+  servicoId  String
+  data       DateTime
+  status     String   @default("pendente")
+  observacao String?
+  criadoEm  DateTime @default(now())
+
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  servico Servico @relation(fields: [servicoId], references: [id])
+}
+
+model Produto {
+  id        String  @id @default(cuid())
+  nome      String
+  descricao String?
+  preco     Float
+  estoque   Int     @default(0)
+  imagem    String?
+  categoria String?
+  ativo     Boolean  @default(true)
+  criadoEm DateTime @default(now())
+
+  itensPedido ItemPedido[]
+}
+
+model Pedido {
+  id        String   @id @default(cuid())
+  clienteId String
+  total     Float
+  status    String   @default("pendente")
+  criadoEm DateTime @default(now())
+
+  cliente Cliente    @relation(fields: [clienteId], references: [id])
+  itens   ItemPedido[]
+}
+
+model ItemPedido {
+  id        String @id @default(cuid())
+  pedidoId  String
+  produtoId String
+  qtd       Int
+  preco     Float
+
+  pedido  Pedido  @relation(fields: [pedidoId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
+}
+
+model BlogPost {
+  id           String   @id @default(cuid())
+  titulo       String
+  conteudo     String
+  imagem       String?
+  publicado    Boolean  @default(false)
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
